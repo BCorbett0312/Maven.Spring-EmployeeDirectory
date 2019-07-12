@@ -9,8 +9,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class PersistenceStarterApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PersistenceStarterApplication.class, args);
+	public static void main(String[] args) {SpringApplication.run(PersistenceStarterApplication.class, args);
 	}
 
 	@Bean

@@ -21,7 +21,7 @@ public class EmployeeServices {
 
 
     public Employee getEmployee(Integer id){
-        return employeeRepository.findOne(id);
+        return employeeRepository.findByEmployeeNumber(id);
     }
 
 
@@ -43,11 +43,12 @@ public class EmployeeServices {
         return employeeRepository.save(old);
     }
 
-    public List<Employee> findEmployeesByManager(String manager){
+    public List<Employee> findEmployeesByManager(Employee manager) {
         return employeeRepository.findEmployeesByManager(manager);
+
     }
 
-
-
-
+    public List<Employee> findEmployeesWithoutManager(){
+        return employeeRepository.findEmployeesByManagerIsNull();
+    }
 }

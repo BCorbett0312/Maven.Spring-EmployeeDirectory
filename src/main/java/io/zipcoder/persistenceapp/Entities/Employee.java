@@ -18,8 +18,10 @@ public class Employee {
     private String phoneNumber;
     private String email;
     private String hireDate;
-    private String manager;
+    private Employee manager;
     private Integer deptNumber;
+
+    public Employee(){}
 
 
     public Integer getEmployeeNumber() {
@@ -78,11 +80,11 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public String getManager() {
+    public Employee getManager() {
         return manager;
     }
 
-    public void setManager(String manager) {
+    public void setManager(Employee manager) {
         this.manager = manager;
     }
 
@@ -96,7 +98,7 @@ public class Employee {
 
 
 
-    public Employee(){}
+
 
 
 

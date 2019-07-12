@@ -35,9 +35,16 @@ public class EmployeeController {
     }
 
     @GetMapping("/API/employee/{manager}")
-    public List<Employee> findEmployeesByManager(@PathVariable String manager){
+    public List<Employee> findEmployeesByManager(@PathVariable Employee manager){
         return employeeServices.findEmployeesByManager(manager);
     }
+
+    @GetMapping("/API/employee/manager=null")
+    public List<Employee> findEmployeesWithoutManager(){
+        return employeeServices.findEmployeesWithoutManager();
+    }
+
+
 
 
 
