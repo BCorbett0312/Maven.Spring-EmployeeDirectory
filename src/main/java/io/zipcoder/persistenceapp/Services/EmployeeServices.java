@@ -5,10 +5,9 @@ import io.zipcoder.persistenceapp.Repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+
+import java.util.List;
+
 
 @Service
 public class EmployeeServices {
@@ -20,52 +19,35 @@ public class EmployeeServices {
         this.employeeRepository = employeeRepository;
     }
 
-    @GetMapping("/API/{id}")
-    public Employee getEmployee(@PathVariable Integer id){
+
+    public Employee getEmployee(Integer id){
         return employeeRepository.findOne(id);
     }
 
-    @PostMapping("/API/{employee}")
-    public Employee createEmployee(@PathVariable Employee employee){
-        return employeeRepository.save(employee);
-    }
 
-    @PutMapping("/API/{id}")
-    public Employee updateManager(Employee employee, String manager, @PathVariable Integer id){
-        employee.setManager(manager);
+    public Employee createEmployee(Employee employee){
         return employeeRepository.save(employee);
     }
 
 
-    @PutMapping("/API/{id}")
-    public Employee updateFirstName(Employee employee, String firstName, @PathVariable Integer id){
-        employee.setFirstName(firstName);
-        return employeeRepository.save(employee);
+    public Employee updateEmployee(Employee employee, Integer id){
+        Employee old = getEmployee(id);
+        old.setFirstName(employee.getFirstName());
+        old.setLastName(employee.getLastName());
+        old.setTitle(employee.getTitle());
+        old.setEmail(employee.getEmail());
+        old.setPhoneNumber(employee.getPhoneNumber());
+        old.setDeptNumber(employee.getDeptNumber());
+        old.setManager(employee.getManager());
+
+        return employeeRepository.save(old);
     }
 
-    @PutMapping("/API/{id}")
-    public Employee updateLastName(Employee employee, String lastName, @PathVariable Integer id){
-        employee.setLastName(lastName);
-        return employeeRepository.save(employee);
+    public List<Employee> findEmployeesByManager(String manager){
+        return employeeRepository.findEmployeesByManager(manager);
     }
 
-    @PutMapping("/API/{id}")
-    public Employee updateDepartmentNumber(Employee employee, Integer deptNumber, @PathVariable Integer id){
-        employee.setDeptNumber(deptNumber);
-        return employeeRepository.save(employee);
-    }
 
-    @PutMapping("/API/{id}")
-    public Employee updatePhoneNumber(Employee employee, String phoneNumber, @PathVariable Integer id){
-        employee.setPhoneNumber(phoneNumber);
-        return employeeRepository.save(employee);
-    }
-
-    @PutMapping("/API/{id}")
-    public Employee updateTitle(Employee employee, String title, @PathVariable Integer id){
-        employee.setTitle(title);
-        return employeeRepository.save(employee);
-    }
 
 
 }
